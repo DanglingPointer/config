@@ -1,0 +1,69 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 1
+}
+
+order += "ipv6"
+#ipv6 {
+#        separator_block_width = 1
+#}
+
+order += "disk /"
+disk "/" {
+        format = "Free: %free"
+}
+
+order += "path_exists VPN"
+path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        path = "/proc/sys/net/ipv4/conf/tun0"
+        #separator_block_width = 1
+}
+
+order += "wireless wlo1"
+wireless wlo1 {
+        format_up = "W: %quality at %essid, %bitrate"
+        format_down = "W: down"
+        #separator_block_width = 1
+}
+
+order += "ethernet enp8s0"
+ethernet enp8s0 {
+        # if you use %speed, i3status requires the cap_net_admin capability
+        format_up = "E: %speed"
+        format_down = "E: down"
+        #separator_block_width = 1
+}
+
+order += "battery 0"
+battery 0 {
+        format = "%status %percentage %remaining %emptytime"
+        format_down = "No battery"
+        status_chr = "⚡ CHR"
+        status_bat = "🔋 BAT"
+        status_full = "☻ FULL"       
+        # status_unk = "? UNK"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+        #separator_block_width = 1
+}
+
+order += "cpu_temperature 0"
+cpu_temperature 0 {
+        format = "T: %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+        #separator_block_width = 1
+}
+
+order += "load"
+load {
+        format = "Load: %5min"
+        #separator_block_width = 1
+}
+
+order += "tztime local"
+tztime local {
+        format = "%d.%m.%Y %H:%M:%S"
+        #separator_block_width = 1
+}
